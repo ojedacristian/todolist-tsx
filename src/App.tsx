@@ -15,7 +15,8 @@ export interface Task {
 interface TaskContextProps {
   tasks: Task[],
   deleteTask: (id:number)=> void,
-  addTask: (task:Task)=> void
+  addTask: (task:Task)=> void,
+  completeTask: (id:number)=> void
 }
 
 // const tasks: Task[] = [{
@@ -32,16 +33,7 @@ interface TaskContextProps {
 
 
 export const App = () => {
-  const [tasks, setTasks] = useState<Task[]>([{
-    id: 1,
-    description: 'limpiar la pieza',
-    completed: false
-  },
-  {
-    id: 2,
-    description: 'limpiar el cuarto',
-    completed: false
-  }])
+  const [tasks, setTasks] = useState<Task[]>([])
 
   const deleteTask = (id: number) => {
     setTasks( prev => prev.filter( task => task.id !== id))
@@ -51,11 +43,27 @@ export const App = () => {
     setTasks(prev => [...prev, task])
   }
 
+  const completeTask = (id:number):void => {
+    console.log(id)
+    setTasks(  prev => {
+      const state = prev.map( ({...t})  => {
+        if (t.id == id ) {
+          t.completed = !t.completed;
+        }
+        return t
+      })
+      console.log('STATE',state)
+      return state
+    }
+    )
+  }
+
   return (
     <Provider value={{
       tasks,
       deleteTask,
-      addTask
+      addTask,
+      completeTask
     }}>
 
       <section
