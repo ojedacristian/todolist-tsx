@@ -11,8 +11,9 @@ export const TaskComponent = ({ Task }: Props) => {
 
     return (
         <div>
-            <span onClick={ ()=> completeTask(Task.id)}
-                className={ Task.completed ? 'underline' : ''} >
+            <span onDoubleClick={ ()=> completeTask(Task.id)}
+                className={ Task.completed ? 'underline' : ''} 
+                style={{ cursor: 'pointer' }}>
                 {Task?.description}
             </span>
             <button

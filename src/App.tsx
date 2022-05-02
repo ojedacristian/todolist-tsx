@@ -1,7 +1,7 @@
-import { createContext } from "react"
+import { createContext, useEffect } from 'react';
 import { Input } from "./components/Input"
 import { TaskList } from "./components/TaskList"
-import {useState} from 'react';
+import { useState } from 'react';
 
 export const TaskContext = createContext({} as TaskContextProps)
 const { Provider } = TaskContext
@@ -14,45 +14,47 @@ export interface Task {
 
 interface TaskContextProps {
   tasks: Task[],
-  deleteTask: (id:number)=> void,
-  addTask: (task:Task)=> void,
-  completeTask: (id:number)=> void
+  deleteTask: (id: number) => void,
+  addTask: (task: Task) => void,
+  completeTask: (id: number) => void
 }
 
-// const tasks: Task[] = [{
-//   id: 1,
-//   description: 'limpiar la pieza',
-//   completed: false
-// },
-// {
-//   id: 2,
-//   description: 'limpiar el cuarto',
-//   completed: false
-// }]
-
-
-
 export const App = () => {
-  const [tasks, setTasks] = useState<Task[]>([])
+
+  const init = () => {
+    const tasksStorage = localStorage.getItem('tasksStorage');
+    const parsed = tasksStorage !== null ? JSON.parse(tasksStorage) : [];
+    return parsed
+  }
+
+  const [tasks, setTasks] = useState<Task[]>( init )
+
+
+  useEffect(() => {
+    localStorage.setItem('tasksStorage', JSON.stringify(tasks))
+  }, [tasks])
+
+
+
 
   const deleteTask = (id: number) => {
-    setTasks( prev => prev.filter( task => task.id !== id))
+    setTasks(prev => prev.filter(task => task.id !== id))
   }
 
   const addTask = (task: Task) => {
     setTasks(prev => [...prev, task])
   }
 
-  const completeTask = (id:number):void => {
+  const completeTask = (id: number): void => {
     console.log(id)
-    setTasks(  prev => {
-      const state = prev.map( ({...t})  => {
-        if (t.id == id ) {
+    setTasks(prev => {
+      const state = prev.map(({ ...t }) => {
+        if (t.id == id) {
           t.completed = !t.completed;
         }
         return t
       })
-      console.log('STATE',state)
+      console.log('STATE', state)
       return state
     }
     )
