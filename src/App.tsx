@@ -69,8 +69,8 @@ export const App = () => {
     }}>
 
       <section
-        className="bg-gradient-to-r from-cyan-500 to-blue-500 
-      h-screen w-screen flex items-center p-4 flex-col">
+        className="bg-gradient-to-r from-gray-900 to-gray-800 
+      h-screen w-screen flex items-center p-4 flex-col text-white">
         <h1 className="text-3xl text-white font-bold">
           TODO LIST
         </h1>

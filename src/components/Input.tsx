@@ -28,7 +28,7 @@ export const Input = () => {
             <div className='flex justify-center items-center'>
 
                 <input
-                    className="input border border-gray-400 appearance-none rounded w-full p-2 focus focus:border-indigo-600 focus:outline-none active:outline-none active:border-indigo-600"
+                    className="input border border-gray-400 appearance-none rounded w-full p-2 focus focus:border-indigo-600 focus:outline-none active:outline-none active:border-indigo-600 text-gray-700"
                     type="text"
                     id='newtask'
                     onChange={handleChange}
@@ -38,7 +38,7 @@ export const Input = () => {
                     placeholder='Agregar nueva tarea...'
                     />
             <button
-                className='bg-transparent hover:bg-blue-500 text-white font-semibold hover:text-blue-700 py-2 m-4 px-4 border border-white hover:border-transparent rounded'
+                className='bg-transparent hover:bg-white text-white font-semibold hover:text-gray-900 py-2 m-4 px-4 border border-white rounded'
                 type='submit'>+</button>
                 </div>
 
